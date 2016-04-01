@@ -1,2 +1,2 @@
 
-module.exports = require('./src/js/example.jsx').default;
+module.exports = require('./src/example.jsx').default;
