@@ -27,6 +27,7 @@ export default class Example extends React.Component {
           width={200}
           aspectRatio={0.8}
           data={this.data1}
+          xFormat={value => value.toFixed(1)}
           onSelectedChange={this.handleSelectedChange.bind(this)}
           selectedX={this.state.selectedX}
           yFormat={value => value.toFixed(2)} />
@@ -35,6 +36,7 @@ export default class Example extends React.Component {
           width={200}
           aspectRatio={0.8}
           data={this.data2}
+          xFormat={value => value.toFixed(1)}
           onSelectedChange={this.handleSelectedChange.bind(this)}
           selectedX={this.state.selectedX}
           yFormat={value => value.toFixed(2)} />

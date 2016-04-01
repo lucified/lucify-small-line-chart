@@ -24,8 +24,8 @@ export default class LineChart extends React.Component {
     selectedX: React.PropTypes.number,
     onSelectedChange: React.PropTypes.func,
     styles: React.PropTypes.object,
-    aspectRatio: React.PropTypes.number
-    //locale: React.PropTypes.object
+    aspectRatio: React.PropTypes.number,
+    locale: React.PropTypes.object
   }
 
   static defaultProps = {
@@ -320,7 +320,7 @@ export default class LineChart extends React.Component {
           dy={this.props.xTickMargin}
           y={this.getScaleHeight()}
           x={0}>
-          {this.getXFormat()(data[0][0])}
+          {this.getXTickFormat()(data[0][0])}
         </text>
         <text className={this.props.styles['static-xtick']}
           textAnchor="end"
@@ -328,7 +328,7 @@ export default class LineChart extends React.Component {
           dy={this.props.xTickMargin}
           y={this.getScaleHeight()}
           x={this.getScaleWidth()}>
-          {this.getXFormat()(data[data.length - 1][0])}
+          {this.getXTickFormat()(data[data.length - 1][0])}
         </text>
       </g>
     );

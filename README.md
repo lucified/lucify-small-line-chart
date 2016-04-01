@@ -44,11 +44,12 @@ should work with React 0.14 as well, but we can't confirm it at this point.
 - **data**: React.PropTypes.arrayOf(React.PropTypes.array),
 - **margin**: React.PropTypes.objectOf(React.PropTypes.number),
 
-- **xFormat**: React.PropTypes.func,
-- **yFormat**: React.PropTypes.func,
-- **yTickFormat**: React.PropTypes.func,
-- **xTickMargin**: React.PropTypes.number,
-- **xTickFormat**: React.PropTypes.func,
+- **xFormat**: Format function for selected (hovered) x-value (optional)
+- **yFormat**: Format function for selected (hovered) y-value (optional)
+- **yTickFormat**: Format function for y-axis tick labels (optional)
+- **xTickFormat**: Format function for x-axis tick labels (optional)
+
+- **xTickMargin**: React.PropTypes.number, 
 - **transitionLength**: React.PropTypes.number,
 - **selectedX**: React.PropTypes.number,
 - **onSelectedChange**: React.PropTypes.func,
