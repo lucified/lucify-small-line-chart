@@ -40,6 +40,7 @@ var config = {
       amd: 'react'
     },
     'd3': 'd3'
+    'lodash': 'lodash'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss'],
