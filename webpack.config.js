@@ -4,11 +4,11 @@ var APP_DIR = path.resolve(__dirname, 'src');
 var BUILD_DIR = path.resolve(__dirname, 'lib');
 
 var config = {
-  entry: APP_DIR + 'bar-chart-range-selector.jsx',
+  entry: APP_DIR + '/line-chart.jsx',
   output: {
     path: BUILD_DIR,
-    filename: 'bar-chart-range-selector.js',
-    library: 'BarChartRangeSelector',
+    filename: 'line-chart.js',
+    library: 'LucifySmallLineChart',
     libraryTarget: 'umd'
   },
   module: {
@@ -39,7 +39,7 @@ var config = {
       commonjs2: 'react',
       amd: 'react'
     },
-    'd3': 'd3'
+    'd3': 'd3',
     'lodash': 'lodash'
   },
   resolve: {
