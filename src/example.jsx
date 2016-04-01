@@ -25,7 +25,7 @@ export default class Example extends React.Component {
         <LineChart
           maxY={10}
           width={200}
-          height={200}
+          aspectRatio={0.8}
           data={this.data1}
           onSelectedChange={this.handleSelectedChange.bind(this)}
           selectedX={this.state.selectedX}
@@ -33,7 +33,7 @@ export default class Example extends React.Component {
         <LineChart
           maxY={10}
           width={200}
-          height={200}
+          aspectRatio={0.8}
           data={this.data2}
           onSelectedChange={this.handleSelectedChange.bind(this)}
           selectedX={this.state.selectedX}

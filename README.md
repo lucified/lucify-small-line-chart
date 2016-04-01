@@ -43,10 +43,7 @@ should work with React 0.14 as well, but we can't confirm it at this point.
 
 - **data**: React.PropTypes.arrayOf(React.PropTypes.array),
 - **margin**: React.PropTypes.objectOf(React.PropTypes.number),
-- **width**: React.PropTypes.number,
-- **height**: React.PropTypes.number,
-- **minY**: React.PropTypes.number,
-- **maxY**: React.PropTypes.number,
+
 - **xFormat**: React.PropTypes.func,
 - **yFormat**: React.PropTypes.func,
 - **yTickFormat**: React.PropTypes.func,
@@ -54,7 +51,13 @@ should work with React 0.14 as well, but we can't confirm it at this point.
 - **xTickFormat**: React.PropTypes.func,
 - **transitionLength**: React.PropTypes.number,
 - **selectedX**: React.PropTypes.number,
-- **handleSelectedChange**: React.PropTypes.func
+- **onSelectedChange**: React.PropTypes.func,
+
+- **minY**: Minimum value for y-axis. Optional, useful for small multiples.
+- **maxY**: Maximum value for y-axis. Optional, useful for small multiples.
+- **width**: Width for the component. Default is `150`.
+- **height**: Height for the component. Default is `null`.
+- **aspectRatio**: Aspect ratio for calculating height based on width. This has no effect when the `height` prop is not `null`. Default value is `1.0`
 
 ## Development
 

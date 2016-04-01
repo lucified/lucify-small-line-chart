@@ -23,7 +23,8 @@ export default class LineChart extends React.Component {
     transitionLength: React.PropTypes.number,
     selectedX: React.PropTypes.number,
     onSelectedChange: React.PropTypes.func,
-    styles: React.PropTypes.object
+    styles: React.PropTypes.object,
+    aspectRatio: React.PropTypes.number
     //locale: React.PropTypes.object
   }
 
@@ -35,7 +36,8 @@ export default class LineChart extends React.Component {
       left: 20
     },
     width: 150,
-    height: 150,
+    height: null,
+    aspectRatio: 1.0,
     transitionLength: 250,
     locale: d3.locale({
       'decimal': '.',
@@ -94,7 +96,10 @@ export default class LineChart extends React.Component {
 
 
   getHeight() {
-    return this.props.height;
+    if (this.props.height) {
+      return this.props.height;
+    }
+    return this.props.width * this.props.aspectRatio;
   }
 
 
@@ -104,7 +109,7 @@ export default class LineChart extends React.Component {
 
 
   getScaleHeight() {
-    return this.props.height - this.props.margin.top - this.props.margin.bottom;
+    return this.getHeight() - this.props.margin.top - this.props.margin.bottom;
   }
 
 
@@ -337,7 +342,7 @@ export default class LineChart extends React.Component {
     return (
       <svg className={this.props.styles['main']}
         onMouseLeave={this.handleMouseLeave.bind(this)}
-        width={this.props.width} height={this.props.height}>
+        width={this.props.width} height={this.getHeight()}>
 
         <g transform={transform} ref='mainTransform'>
 
