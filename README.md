@@ -5,7 +5,8 @@
 
 A [controlled](https://facebook.github.io/react/docs/forms.html) React component that shows a small line chart, useful for linked small multiples. Built using React and D3.js
 
-![Animated GIF of component](bar-chart-range-selector.gif)
+Example of two linked charts ([code]):
+![Animated GIF of component](linked-charts.gif)
 
 This is a pre-release of a package belonging to the Lucify platform. It has been published to satisfy dependencies of other packages. Any APIs may change without notice.
 
