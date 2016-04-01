@@ -3,8 +3,7 @@ import React from 'react';
 import d3 from 'd3';
 import _ from 'lodash';
 
-import styles from '../../scss/line-chart.scss';
-import locale from '../locale-fi';
+import styles from './line-chart.scss';
 
 
 export default class LineChart extends React.Component {
@@ -23,7 +22,9 @@ export default class LineChart extends React.Component {
     xTickFormat: React.PropTypes.func,
     transitionLength: React.PropTypes.number,
     selectedX: React.PropTypes.number,
-    onSelectedChange: React.PropTypes.func
+    onSelectedChange: React.PropTypes.func,
+    styles: React.PropTypes.object
+    //locale: React.PropTypes.object
   }
 
   static defaultProps = {
@@ -36,13 +37,56 @@ export default class LineChart extends React.Component {
     width: 150,
     height: 150,
     transitionLength: 250,
-    xFormat: locale.numberFormat('n'),
-    yFormat: locale.numberFormat('n'),
+    locale: d3.locale({
+      'decimal': '.',
+      'thousands': ',',
+      'grouping': [3],
+      'currency': ['$', ''],
+      'dateTime': '%a %b %e %X %Y',
+      'date': '%m/%d/%Y',
+      'time': '%H:%M:%S',
+      'periods': ['AM', 'PM'],
+      'days': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      'shortDays': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      'months': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      'shortMonths': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    }),
+    xFormat: null,
+    yFormat: null,
     xTickMargin: 15,
-    xTickFormat: locale.numberFormat('n'),
-    yTickFormat: locale.numberFormat('s')
+    xTickFormat: null,
+    yTickFormat: null,
+    styles: styles
   }
 
+  getXFormat() {
+    if (this.props.xFormat) {
+      return this.props.xFormat;
+    }
+    return this.props.locale.numberFormat('n');
+  }
+
+  getYFormat() {
+    if (this.props.yFormat) {
+      return this.props.yFormat;
+    }
+    return this.props.locale.numberFormat('n');
+  }
+
+  getXTickFormat() {
+    if (this.props.xTickFormat) {
+      return this.props.xTickFormat;
+    }
+    return this.props.locale.numberFormat('n');
+  }
+
+  getYTickFormat() {
+    if (this.props.yTickFormat) {
+      console.log("using custom ytickFormat");
+      return this.props.yTickFormat;
+    }
+    return this.props.locale.numberFormat('s');
+  }
 
   getWidth() {
     return this.props.width;
@@ -157,7 +201,7 @@ export default class LineChart extends React.Component {
       .outerTickSize(0)
       .tickSubdivide(1)
       .tickSize(-this.getScaleWidth())
-      .tickFormat(this.props.yTickFormat);
+      .tickFormat(this.getYTickFormat());
 
     d3.select(React.findDOMNode(this.refs.yAxis))
       .transition(this.props.transitionLength)
@@ -223,19 +267,19 @@ export default class LineChart extends React.Component {
     let maxX = this.getScaleWidth();
     let minX = 0;
 
-    let xTick = this.props.xFormat(this.props.selectedX);
+    let xTick = this.getXFormat()(this.props.selectedX);
     let xTickMove = this.labelPlacement(xTick, circleX, minX, maxX);
 
-    let yTick = this.props.yFormat(found[1]);
+    let yTick = this.getYFormat()(found[1]);
 
     return (
       <g>
-        <circle className={styles['circle']}
+        <circle className={this.props.styles['circle']}
           r={2.5}
           cx={circleX}
           cy={circleY}
           style={{pointerEvents: 'none'}} />
-        <text className={styles['caption']}
+        <text className={this.props.styles['caption']}
           x={circleX}
           y={circleY}
           textAnchor="middle"
@@ -243,7 +287,7 @@ export default class LineChart extends React.Component {
           style={{pointerEvents: 'none'}}>
           {yTick}
         </text>
-        <text className={styles['year']}
+        <text className={this.props.styles['xtick']}
           x={circleX + xTickMove}
           textAnchor="middle"
           dy={this.props.xTickMargin}
@@ -265,21 +309,21 @@ export default class LineChart extends React.Component {
 
     return (
       <g>
-        <text className={styles['static-year']}
+        <text className={this.props.styles['static-xtick']}
           textAnchor="start"
           style={{pointerEvents: 'none'}}
           dy={this.props.xTickMargin}
           y={this.getScaleHeight()}
           x={0}>
-          {this.props.xFormat(data[0][0])}
+          {this.getXFormat()(data[0][0])}
         </text>
-        <text className={styles['static-year']}
+        <text className={this.props.styles['static-xtick']}
           textAnchor="end"
           style={{pointerEvents: 'none'}}
           dy={this.props.xTickMargin}
           y={this.getScaleHeight()}
           x={this.getScaleWidth()}>
-          {this.props.xFormat(data[data.length - 1][0])}
+          {this.getXFormat()(data[data.length - 1][0])}
         </text>
       </g>
     );
@@ -291,17 +335,17 @@ export default class LineChart extends React.Component {
     let transform = `translate(${this.props.margin.left}, ${this.props.margin.top})`;
 
     return (
-      <svg className={styles['main']}
+      <svg className={this.props.styles['main']}
         onMouseLeave={this.handleMouseLeave.bind(this)}
         width={this.props.width} height={this.props.height}>
 
         <g transform={transform} ref='mainTransform'>
 
-          <g className={styles['axis']} ref='yAxis' />
+          <g className={this.props.styles['axis']} ref='yAxis' />
 
           <g>
-            <path ref='area' className={styles['area']} style={{pointerEvents: 'none'}} />
-            <path ref='line' className={styles['line']} style={{pointerEvents: 'none'}} />
+            <path ref='area' className={this.props.styles['area']} style={{pointerEvents: 'none'}} />
+            <path ref='line' className={this.props.styles['line']} style={{pointerEvents: 'none'}} />
           </g>
 
           {this.getXAxisTicks()}

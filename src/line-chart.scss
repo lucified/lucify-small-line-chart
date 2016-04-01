@@ -1,0 +1,94 @@
+
+$lucify-body-font: 'Open Sans', sans-serif;
+$lucify-header-font: 'Montserrat', sans-serif;
+
+$lucify-gray: #E4E7EA;
+$lucify-muted-blue: #828A9F;
+
+$lucify-gray-line-color: #c8cacc;
+$lucify-dark-cyan: #296f6c;
+
+
+$area-color: $lucify-muted-blue;
+
+
+.main {
+  overflow: visible !important;
+  font-family: $lucify-body-font;
+}
+
+.chart {
+  z-index: 100;
+}
+
+.area {
+  fill: lighten($area-color, 0);
+}
+
+.line {
+  fill: none;
+  stroke: darken($area-color, 20);
+  stroke-width: 1.4px;
+}
+
+.title {
+  font-size: 12px;
+}
+
+@mixin tickText() {
+  fill: rgba(0,0,0,0.5);
+  font-size: 0.7rem;
+}
+
+.axis {
+  :global {
+    path {
+      display: none;
+    }
+    .tick {
+      line {
+        stroke-width: 1.0px;
+        shape-rendering: crispEdges;
+        stroke: lighten(#000, 90);
+        pointer-events: none;
+      }
+    }
+    text {
+      @include tickText();
+    }
+  }
+}
+
+.hidden {
+  display:none;
+  opacity: 0.0;
+}
+
+
+.xtick {
+  @include tickText();
+}
+
+.static-xtick {
+  @include tickText();
+}
+
+.caption {
+  @include tickText();
+  fill: darken($lucify-gray, 20);
+  font-weight: 600;
+}
+
+@supports (paint-order: stroke) {
+  .caption {
+    paint-order: stroke;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
+
+.circle {
+
+}
