@@ -2,7 +2,7 @@
   "name": "lucify-small-line-chart",
   "version": "0.1.0",
   "description": "A React component that shows a small line chart, useful for linked small multiples",
-  "main": "lib/bar-chart-range-selector.js",
+  "main": "lib/line-chart.js",
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack -p",
