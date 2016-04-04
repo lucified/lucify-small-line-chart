@@ -9,7 +9,8 @@ export default class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedX: 10
+      selectedX: 10,
+      checked: false
     };
   }
 
@@ -17,32 +18,52 @@ export default class Example extends React.Component {
     this.setState({selectedX: x});
   }
 
+
+  xFormat(value) {
+    return value.toFixed(1);
+  }
+
+
+  yFormat(value) {
+    return value.toFixed(2);
+  }
+
+
+  getCharts() {
+    return _.range(0, 40).map(index => {
+      return (<LineChart
+        key={index}
+        maxY={10}
+        width={200}
+        aspectRatio={0.8}
+        data={this.getData()}
+        xFormat={this.xFormat}
+        onSelectedChange={this.handleSelectedChange.bind(this)}
+        selectedX={this.state.selectedX}
+        yFormat={this.yFormat} />);
+    });
+
+  }
+
+
+  handleChecked() {
+    this.setState({checked: !this.state.checked});
+  }
+
+
   render() {
     return (
       <div>
         <h3>Example of two small linked line charts</h3>
+        <div><input type="checkbox"
+          checked={this.state.checked}
+          onChange={this.handleChecked.bind(this)} /> Alternative data</div>
         <p>Selected: {this.state.selectedX}</p>
-        <LineChart
-          maxY={10}
-          width={200}
-          aspectRatio={0.8}
-          data={this.data1}
-          xFormat={value => value.toFixed(1)}
-          onSelectedChange={this.handleSelectedChange.bind(this)}
-          selectedX={this.state.selectedX}
-          yFormat={value => value.toFixed(2)} />
-        <LineChart
-          maxY={10}
-          width={200}
-          aspectRatio={0.8}
-          data={this.data2}
-          xFormat={value => value.toFixed(1)}
-          onSelectedChange={this.handleSelectedChange.bind(this)}
-          selectedX={this.state.selectedX}
-          yFormat={value => value.toFixed(2)} />
+        {this.getCharts()}
       </div>
     );
   }
+
 
   componentWillMount() {
     this.data1 = _.range(1, 100).map(index => {
@@ -53,8 +74,13 @@ export default class Example extends React.Component {
     });
   }
 
+
   getData() {
-    return this.data;
+    if (this.state.checked) {
+      return this.data1;
+    } else {
+      return this.data2;
+    }
   }
 
 }

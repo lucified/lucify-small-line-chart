@@ -186,8 +186,22 @@ export default class LineChart extends React.Component {
   }
 
 
-  componentDidUpdate() {
-    this.update();
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data
+      || prevProps.margin !== this.props.margin
+      || prevProps.width !== this.props.width
+      || prevProps.height !== this.props.height
+      || prevProps.minY !== this.props.minY
+      || prevProps.maxY !== this.props.maxY
+      || prevProps.xFormat !== this.props.xFormat
+      || prevProps.yFormat !== this.props.yFormat
+      || prevProps.yTickFormat !== this.props.yTickFormat
+      || prevProps.xTickFormat !== this.props.xTickFormat
+      || prevProps.aspectRatio !== this.props.aspectRatio
+      || prevProps.locale !== this.props.locale)
+    {
+      this.update();
+    }
   }
 
 
