@@ -5,7 +5,7 @@
 
 A [controlled](https://facebook.github.io/react/docs/forms.html) React component that shows a small line chart, useful for linked small multiples. Built using React and D3.js
 
-Example of two linked charts ([code](https://github.com/lucified/lucify-small-line-chart/blob/master/src/example.jsx)):
+Example of linked charts ([code](https://github.com/lucified/lucify-small-line-chart/blob/master/src/example.jsx)):
 
 ![Animated GIF of component](linked-charts.gif)
 
@@ -49,7 +49,7 @@ should work with React 0.14 as well, but we can't confirm it at this point.
 - **yTickFormat**: Format function for y-axis tick labels (optional)
 - **xTickFormat**: Format function for x-axis tick labels (optional)
 
-- **xTickMargin**: React.PropTypes.number, 
+- **xTickMargin**: React.PropTypes.number,
 - **transitionLength**: React.PropTypes.number,
 - **selectedX**: React.PropTypes.number,
 - **onSelectedChange**: React.PropTypes.func,
