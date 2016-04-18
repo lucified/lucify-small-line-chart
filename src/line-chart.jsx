@@ -21,6 +21,7 @@ export default class LineChart extends React.Component {
     xTickMargin: React.PropTypes.number,
     xTickFormat: React.PropTypes.func,
     transitionLength: React.PropTypes.number,
+    axisTransitionLength: React.PropTypes.number,
     selectedX: React.PropTypes.number,
     onSelectedChange: React.PropTypes.func,
     styles: React.PropTypes.object,
@@ -40,6 +41,7 @@ export default class LineChart extends React.Component {
     height: null,
     aspectRatio: 1.0,
     transitionLength: 250,
+    axisTransitionLength: 0,
     locale: d3.locale({
       decimal: '.',
       thousands: ',',
@@ -322,7 +324,7 @@ export default class LineChart extends React.Component {
       .tickFormat(this.getYTickFormat());
 
     d3.select(React.findDOMNode(this.refs.yAxis))
-      .transition(this.props.transitionLength)
+      .transition(this.props.axisTransitionLength)
       .call(yAxis);
   }
 
