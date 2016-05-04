@@ -29,15 +29,22 @@ export default class Example extends React.Component {
     if (this.state.checked) {
       return this.data1;
     }
-
     return this.data2;
+  }
+
+  getMaxY() {
+    if (!this.state.checked) {
+      return 10;
+    } else {
+      return 6;
+    }
   }
 
   getCharts() {
     return _.range(0, 40).map(index => (
       <LineChart
         key={index}
-        maxY={10}
+        maxY={this.getMaxY()}
         width={200}
         aspectRatio={0.8}
         data={this.getData()}

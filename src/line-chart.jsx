@@ -323,9 +323,11 @@ export default class LineChart extends React.Component {
       .tickSize(-this.getScaleWidth())
       .tickFormat(this.getYTickFormat());
 
-    d3.select(React.findDOMNode(this.refs.yAxis))
-      .transition(this.props.axisTransitionLength)
-      .call(yAxis);
+    const sel = d3.select(React.findDOMNode(this.refs.yAxis));
+    if (this.props.axisTransitionLength > 0) {
+      sel.transition(this.props.axisTransitionLength);
+    }
+    sel.call(yAxis);
   }
 
 
